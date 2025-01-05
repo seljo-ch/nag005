@@ -21,7 +21,16 @@ class eCallSMS
         ]);
     }
 
-    public function fetchData(string $endpoint = '')
+    /**
+     * Send SMS via API
+     *
+     * @param string $from Absendernummer
+     * @param string $to Empfängernummer
+     * @param string $text Nachrichtentext
+     * @param string $endpoint API-Endpoint (optional)
+     * @return mixed
+     */
+    public function sendSms(string $from, string $to, string $text, string $endpoint = '')
     {
         // Benutzername und Passwort aus der Config holen
         $username = config('services.ecallSMS.username');
@@ -30,13 +39,26 @@ class eCallSMS
         // Basic Auth Header erstellen
         $authHeader = 'Basic ' . base64_encode("{$username}:{$password}");
 
+        // Body-Daten
+        $body = [
+            'channel' => 'Sms',
+            'from'    => $from,
+            'to'      => $to,
+            'content' => [
+                'type' => 'Text',
+                'text' => $text,
+            ],
+        ];
+
         try {
             // Anfrage ausführen
-            $response = $this->client->get($endpoint, [
+            $response = $this->client->post($endpoint, [
                 'headers' => [
                     'Accept'        => 'application/json',
                     'Authorization' => $authHeader,
+                    'Content-Type'  => 'application/json',
                 ],
+                'json' => $body, // JSON-Body an die API senden
             ]);
 
             return json_decode($response->getBody(), true); // JSON-Daten zurückgeben

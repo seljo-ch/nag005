@@ -9,11 +9,15 @@ class SendSMS extends Component
 {
     public $data; // Variable für die Daten
 
-    public function fetchData(eCallSMS $apiService)
+    public function sendSms(eCallSMS $service)
     {
-        $this->data = $apiService->fetchData('message');
-    }
+        $from = '0041769999999';
+        $to = '0041768888888';
+        $text = 'Hello eCall world :)';
 
+        $response = $service->sendSms($from, $to, $text, 'message'); // 'send-sms' ist der API-Endpoint
+        dd($response); // Debugging
+    }
 
     public function render()
     {

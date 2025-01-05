@@ -6,6 +6,6 @@
         @else
             <p>Keine Daten verfügbar.</p>
         @endif
-        <x-button wire:click="fetchData">Daten abrufen</x-button>
+        <x-button wire:click="sendSms">Daten abrufen</x-button>
     </x-card>
 </div>
