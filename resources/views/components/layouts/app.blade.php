@@ -54,6 +54,7 @@
         <x-menu activate-by-route>
             <x-menu-item title="Home" icon="o-home" link="###" />
             <x-menu-item title="Users" icon="o-users" link="/users" />
+            <x-menu-item title="Telefon Notiz" icon="o-phone" link="/tel" />
             <x-menu-item title="SMS Versenden" icon="o-envelope" link="/sms" />
             <x-menu-sub title="Settings" icon="o-cog-6-tooth">
                 <x-menu-item title="Wifi" icon="o-wifi" link="####" />

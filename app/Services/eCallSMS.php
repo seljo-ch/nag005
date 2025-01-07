@@ -61,11 +61,15 @@ class eCallSMS
                 'json' => $body, // JSON-Body an die API senden
             ]);
 
+            // HTTP-Status prüfen
+            if ($response->getStatusCode() < 200 || $response->getStatusCode() >= 300) {
+                throw new \Exception('API-Fehler: ' . $response->getBody());
+            }
+
             return json_decode($response->getBody(), true); // JSON-Daten zurückgeben
         } catch (\Exception $e) {
-            // Fehlerbehandlung mit vollständiger URL
-            $fullUrl = rtrim($this->baseUri, '/') . '/' . ltrim($endpoint, '/');
-            return 'Fehler beim Abrufen von: ' . $fullUrl . ' - ' . $e->getMessage();
+            // Ausnahme erneut werfen für Fehlerbehandlung in der Komponente
+            throw new \Exception('Fehler beim API-Aufruf: ' . $e->getMessage());
         }
     }
 }

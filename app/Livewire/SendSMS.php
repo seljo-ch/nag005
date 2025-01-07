@@ -4,25 +4,57 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use App\Services\eCallSMS;
+use Mary\Traits\Toast;
+
 
 class SendSMS extends Component
 {
-    public $data; // Variable für die Daten
 
+    use Toast;
+
+    public $from;
+    public $to;
+    public $text;
+    public $response;
+
+    public function updatedTo($value)
+    {
+        // Nummer formatieren, wenn sie geändert wird
+        $this->to = $this->formatPhoneNumber($value);
+    }
+
+    private function formatPhoneNumber($number)
+    {
+        // Nummer auf das gewünschte Format prüfen
+        if (preg_match('/^0\d{9}$/', $number)) {
+            return '0041' . substr($number, 1); // "0" durch "0041" ersetzen
+        }
+        return $number; // Unveränderte Rückgabe, falls nicht im erwarteten Format
+    }
+
+    public function mount()
+    {
+        // Standardwert für das 'from'-Feld setzen
+        $this->from = '0041764766627'; // Beispielnummer
+    }
     public function sendSms(eCallSMS $service)
     {
-        $from = '0041769999999';
-        $to = '0041768888888';
-        $text = 'Hello eCall world :)';
+        $this->validate([
+            'from' => 'required|string',
+            'to' => 'required|string',
+            'text' => 'required|string|max:160',
+        ]);
 
-        $response = $service->sendSms($from, $to, $text, 'message'); // 'send-sms' ist der API-Endpoint
-        dd($response); // Debugging
+        try {
+            $this->response = $service->sendSms($this->from, $this->to, $this->text, 'message2');
+            $this->success('SMS erfolgreich gesendet!',  timeout: 5000);
+        } catch (\Exception $e) {
+            $this->error('Fehler beim Senden der SMS!', description: $e->getMessage(),  timeout: 10000);
+        }
     }
 
     public function render()
     {
-        return view('livewire.send-sms', [
-            'data' => $this->data,
-        ]);
+        return view('livewire.send-sms');
     }
 }
