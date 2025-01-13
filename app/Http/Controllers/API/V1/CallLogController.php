@@ -46,17 +46,48 @@ class CallLogController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateCallLogRequest $request, CallLog $callLog)
+    public function update(UpdateCallLogRequest $request, $id)
     {
-        $callLog->update($request->validated());
-        return CallLogResource::make($callLog);
+        // Versuche, das CallLog-Modell anhand der ID zu finden
+        $callLog = CallLog::find($id);
+
+        if (!$callLog) {
+            // Wenn das Modell nicht gefunden wird, gib eine Fehlermeldung zurück
+            return response()->json(['message' => 'Call log not found'], 404);
+        }
+
+        // Validierte Daten holen
+        $validatedData = $request->validated();
+
+        // Falls der Timestamp vorhanden ist, sicherstellen, dass er korrekt formatiert wird
+        if (isset($validatedData['Timestamp'])) {
+            $validatedData['Timestamp'] = \Carbon\Carbon::parse($validatedData['Timestamp'])->format('Y-m-d H:i:s');
+        }
+
+        // Das Update auf das Modell anwenden
+        if ($callLog->update($validatedData)) {
+            \Log::info("CallLog updated successfully.");
+        } else {
+            \Log::error("Failed to update CallLog with ID {$callLog->id}. Update data: " . json_encode($validatedData));
+        }
+
+        return new CallLogResource($callLog);
     }
+
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(CallLog $callLog)
+    public function destroy(CallLog $request, $id)
     {
-        //
+        $callLog = CallLog::find($id);
+
+        if (!$callLog) {
+            return response()->json(['message' => 'Call log not found'], 404);
+        }
+
+        $callLog->delete();
+
+        return response()->noContent();
     }
 }

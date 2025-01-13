@@ -25,9 +25,9 @@ class StoreCallLogRequest extends FormRequest
             'CallerNumber' => 'required|string',
             'CallerDisplayName' => 'required|string',
             'ADUser' => 'required|string',
-            'Email' => 'email',
-            'Timestamp' => 'string',
-
+            'Email' => 'nullable|email',
+            // Anpassen der Validierung für Timestamp
+            'Timestamp' => 'nullable|date_format:Y-m-d H:i:s',  // Validierung für das Datetime-Format
         ];
     }
 }

@@ -21,5 +21,6 @@ Route::get('/users', \App\Livewire\UserAdmin::class);
 Route::get('/users/{id}/edit', UserAdmin::class)->name('editUser');
 
 Route::get('/sms', \App\Livewire\SendSMS::class);
-Route::get('/tel', \App\Livewire\TelNote::class);
+Route::get('/note', \App\Livewire\TelNote::class);
+Route::get('/journal', \App\Livewire\CallJoural::class);
 

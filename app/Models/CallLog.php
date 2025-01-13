@@ -10,6 +10,10 @@ class CallLog extends Model
     use HasFactory;
 
     protected $fillable = [
-        'CallerNumber', 'CallerDisplayName', 'ADUser', 'Email', 'Timestamp',
+        'CallerNumber', 'CallerDisplayName', 'ADUser', 'Email','Note', 'Timestamp',
+    ];
+
+    protected $casts = [
+        'Note' => 'boolean',
     ];
 }
