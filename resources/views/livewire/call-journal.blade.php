@@ -1,6 +1,6 @@
 <div>
     <!-- HEADER -->
-    <x-header title="Users" subtitle="Check this on mobile">
+    <x-header title="Telefon Journal">
         <x-slot:middle class="!justify-end">
             <x-input placeholder="Suche..." wire:model.live.debounce="search" clearable icon="o-magnifying-glass"/>
         </x-slot:middle>
@@ -13,15 +13,7 @@
     <x-card>
         <x-table :headers="$headers" :rows="$calls" :sort-by="$sortBy" with-pagination>
             @scope('cell_CallerNumber',$call)
-                <x-popover position="top-start" offset="5">
-                    <x-slot:trigger>
-                        <a href="tel:{{ $call['CallerNumber'] }}" class="text-blue-500 hover:underline">{{ $call['CallerNumber'] }}</a>
-                    </x-slot:trigger>
-                    <x-slot:content>
-                        {{ $call['CallerNumber'] }} Anrufen
-                    </x-slot:content>
-                </x-popover>
-
+                <x-button label="{{ $call['CallerNumber'] }}" link="tel:{{ $call['CallerNumber'] }}" external icon="o-phone" tooltip="Anrufen" class="btn-ghost btn btn-xs" />
             @endscope
             @scope('cell_Note', $call)
                 @if (!empty($call['Note']))
@@ -30,8 +22,8 @@
             @endscope
             @scope('actions', $call)
                 <div class="flex space-x-2">
-                    <x-button icon="c-pencil-square" wire:click="editUser({{ $call['id'] }})" spinner class="btn-ghost btn-sm" />
-                    <x-button icon="o-trash" wire:click="delete({{ $call['id'] }})" spinner class="btn-ghost btn-sm text-red-500" />
+                    <x-button icon="c-pencil-square" wire:click="editUser({{ $call['id'] }})" spinner class="btn-ghost btn-sm" tooltip-left="Neue Notitz"/>
+
                 </div>
             @endscope
         </x-table>
