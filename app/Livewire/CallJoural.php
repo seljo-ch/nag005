@@ -20,7 +20,24 @@ class CallJoural extends Component
     public array $sortBy = ['column' => 'name', 'direction' => 'asc'];
     public bool $drawer = false;
     public string $search = '';
+    public $TelNote = false; // Steuert das Modal
+    public $selectedCallId;   // Speichert die Call-ID
 
+    public function openTelNote($callId)
+    {
+        $this->selectedCallId = $callId;
+        $this->TelNote = true;
+
+        // Debugging (wird in der Livewire-Console geloggt)
+        logger()->info('openTelNote aufgerufen', ['selectedCallId' => $this->selectedCallId]);
+
+    }
+
+    public function closeTelNote()
+    {
+        $this->TelNote = false;
+        $this->selectedCallId = null; // Reset nach dem Schließen
+    }
 
     public function headers(): array
     {
@@ -30,7 +47,7 @@ class CallJoural extends Component
             ['key' => 'CallerDisplayName', 'label' => 'Name', 'class' => 'w-64'],
             // ['key' => 'Email', 'label' => 'E-mail', 'sortable' => false],
             ['key' => 'Timestamp', 'label' => 'Datum & Zeit', 'format' => ['date', 'd.m.Y - H:m']],
-            ['key' => 'Note', 'label' => 'Notitz', 'class' => 'w-10', ],
+            ['key' => 'Note', 'label' => 'Notiz', 'class' => 'w-10', ],
         ];
     }
 

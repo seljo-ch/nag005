@@ -15,17 +15,22 @@
             @scope('cell_CallerNumber',$call)
                 <x-button label="{{ $call['CallerNumber'] }}" link="tel:{{ $call['CallerNumber'] }}" external icon="o-phone" tooltip="Anrufen" class="btn-ghost btn btn-xs" />
             @endscope
+
             @scope('cell_Note', $call)
                 @if (!empty($call['Note']))
                     <x-icon name="s-envelope" class="w-5 h-5 text-green-500 text-2xl" />
                 @endif
             @endscope
-            @scope('actions', $call)
-                <div class="flex space-x-2">
-                    <x-button icon="c-pencil-square" wire:click="editUser({{ $call['id'] }})" spinner class="btn-ghost btn-sm" tooltip-left="Neue Notitz"/>
 
-                </div>
+            @scope('actions', $call)
+            <div class="flex space-x-2">
+                <x-button icon="c-plus-circle"
+                          wire:click="openTelNote({{ $call['id'] }})"
+                          tooltip-left="Neue Notiz"/>
+            </div>
             @endscope
+
+
         </x-table>
     </x-card>
     <!-- FILTER DRAWER -->
@@ -37,4 +42,16 @@
             <x-button label="Done" icon="o-check" class="btn-primary" @click="$wire.drawer = false" />
         </x-slot:actions>
     </x-drawer>
+
+    <!-- Modal new Tel Note -->
+
+    <x-modal wire:model.defer="TelNote" class="backdrop-blur">
+        @if ($selectedCallId)
+            <livewire:tel-note :call-id="$selectedCallId" />
+        @endif
+    </x-modal>
+
+
+
+
 </div>

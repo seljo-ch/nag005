@@ -3112,16 +3112,16 @@
         },
         {
             "name": "livewire/livewire",
-            "version": "v3.5.18",
+            "version": "v3.5.19",
             "source": {
                 "type": "git",
                 "url": "https://github.com/livewire/livewire.git",
-                "reference": "62f0fa6b340a467c25baa590a567d9a134b357da"
+                "reference": "3f1b2c134cde537bb7666e490ea21a8ffc8bbf14"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/livewire/livewire/zipball/62f0fa6b340a467c25baa590a567d9a134b357da",
-                "reference": "62f0fa6b340a467c25baa590a567d9a134b357da",
+                "url": "https://api.github.com/repos/livewire/livewire/zipball/3f1b2c134cde537bb7666e490ea21a8ffc8bbf14",
+                "reference": "3f1b2c134cde537bb7666e490ea21a8ffc8bbf14",
                 "shasum": ""
             },
             "require": {
@@ -3176,7 +3176,7 @@
             "description": "A front-end framework for Laravel.",
             "support": {
                 "issues": "https://github.com/livewire/livewire/issues",
-                "source": "https://github.com/livewire/livewire/tree/v3.5.18"
+                "source": "https://github.com/livewire/livewire/tree/v3.5.19"
             },
             "funding": [
                 {
@@ -3184,7 +3184,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-12-23T15:05:02+00:00"
+            "time": "2025-01-28T21:39:51+00:00"
         },
         {
             "name": "livewire/volt",
@@ -4832,16 +4832,16 @@
         },
         {
             "name": "robsontenorio/mary",
-            "version": "1.41.5",
+            "version": "1.41.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/robsontenorio/mary.git",
-                "reference": "a92f65bf3b8565ba93338955f3bc5418ed7f8deb"
+                "reference": "364708bbed8a954bb9072957cc7cbcd8b3301c09"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/robsontenorio/mary/zipball/a92f65bf3b8565ba93338955f3bc5418ed7f8deb",
-                "reference": "a92f65bf3b8565ba93338955f3bc5418ed7f8deb",
+                "url": "https://api.github.com/repos/robsontenorio/mary/zipball/364708bbed8a954bb9072957cc7cbcd8b3301c09",
+                "reference": "364708bbed8a954bb9072957cc7cbcd8b3301c09",
                 "shasum": ""
             },
             "require": {
@@ -4907,7 +4907,7 @@
             ],
             "support": {
                 "issues": "https://github.com/robsontenorio/mary/issues",
-                "source": "https://github.com/robsontenorio/mary/tree/1.41.5"
+                "source": "https://github.com/robsontenorio/mary/tree/1.41.8"
             },
             "funding": [
                 {
@@ -4915,7 +4915,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-01-01T14:48:44+00:00"
+            "time": "2025-02-03T22:09:17+00:00"
         },
         {
             "name": "spatie/laravel-permission",
