@@ -7,6 +7,8 @@
     <title>{{ isset($title) ? $title.' - '.config('app.name') : config('app.name') }}</title>
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <script src="https://cdn.tiny.cloud/1/hhqrxrzqm2x8hptyhkermsbqxc6stmpinglnf071x5f77833/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+
 </head>
 <body class="font-sans antialiased">
 
@@ -26,7 +28,7 @@
     {{-- Right side actions --}}
     <x-slot:actions>
         <x-button label="Support - Ticket" icon="o-ticket" external link="https://support.nyffenegger.ch" class="btn-ghost btn-sm" responsive />
-        <x-button label="Wissensdatenbank" icon="o-book-open" external link="https://support.nyffenegger.ch" class="btn-ghost btn-sm" responsive />
+        <x-button label="Wissensdatenbank" icon="o-book-open" external link="https://support.nyffenegger.ch/help/de" class="btn-ghost btn-sm" responsive />
         <x-button label="TeamViewer" icon="o-question-mark-circle" external link="https://support.nyffenegger.ch" class="btn-ghost btn-sm" responsive />
         {{--  <x-button label="Notifications" icon="o-bell" link="###" class="btn-ghost btn-sm" responsive />
          <x-theme-toggle darkTheme="dracula" lightTheme="light" /> --}}

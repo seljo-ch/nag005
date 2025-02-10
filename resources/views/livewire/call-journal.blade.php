@@ -26,7 +26,7 @@
             <div class="flex space-x-2">
                 <x-button icon="c-plus-circle"
                           wire:click="openTelNote({{ $call['id'] }})"
-                          tooltip-left="Neue Notiz"/>
+                          tooltip-left="Neue Notiz" />
             </div>
             @endscope
 
@@ -45,11 +45,13 @@
 
     <!-- Modal new Tel Note -->
 
-    <x-modal wire:model.defer="TelNote" class="backdrop-blur">
-        @if ($selectedCallId)
-            <livewire:tel-note :call-id="$selectedCallId" />
-        @endif
+    <x-modal wire:model.defer="TelNote" class="backdrop-blur" title="Notiz für: {{ $selectedCallId ? App\Models\CallLog::find($selectedCallId)?->CallerNumber : '' }}"
+            subtitle="Erstelle eine Gesprächsnotiz für diesen Anruf und sende diese per E-Mail." box-class="w-11/12 max-w-5xl">
+
+        <livewire:tel-note :call-id="$selectedCallId" wire:key="'tel-note-' . $selectedCallId" />
     </x-modal>
+
+
 
 
 

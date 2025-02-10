@@ -23,21 +23,27 @@ class CallJoural extends Component
     public $TelNote = false; // Steuert das Modal
     public $selectedCallId;   // Speichert die Call-ID
 
+    protected $listeners = ['closeTelNote' => 'closeTelNote'];
+
+    public function closeTelNote()
+    {
+        $this->TelNote = false;
+        logger()->info('Close Modal aufgerufen');
+
+    }
+
+
     public function openTelNote($callId)
     {
         $this->selectedCallId = $callId;
         $this->TelNote = true;
 
-        // Debugging (wird in der Livewire-Console geloggt)
         logger()->info('openTelNote aufgerufen', ['selectedCallId' => $this->selectedCallId]);
 
+        // Livewire anweisen, dass TelNote sich aktualisiert
+        $this->dispatch('refreshTelNote', $this->selectedCallId);
     }
 
-    public function closeTelNote()
-    {
-        $this->TelNote = false;
-        $this->selectedCallId = null; // Reset nach dem Schließen
-    }
 
     public function headers(): array
     {
