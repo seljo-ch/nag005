@@ -21,7 +21,7 @@ class CallLogFactory extends Factory
             'CallerDisplayName' => fake('de_CH')->name(),
             'ADUser' => 'nyffenegger\\ose',
             'Email' => fake('de_CH')->email(),
-            'Note' => fake()->boolean() ? '1' : '0',
+            //'Note' => fake()->boolean() ? '1' : '0',
             'Timestamp' => fake()->dateTime()
         ];
     }

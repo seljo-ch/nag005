@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\CallLog;
+use App\Models\Message;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -24,6 +25,7 @@ class DatabaseSeeder extends Seeder
         ]); */
 
         CallLog::factory()->count(10)->create();
+        Message::factory()->count(4)->create();
 
     }
 }
