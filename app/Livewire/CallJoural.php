@@ -40,7 +40,7 @@ class CallJoural extends Component
 
         logger()->info('openTelNote aufgerufen', ['selectedCallId' => $this->selectedCallId]);
 
-        // Livewire anweisen, dass TelNote sich aktualisiert
+        // Livewire anweisen, dass TelNoteCreate sich aktualisiert
         $this->dispatch('refreshTelNote', $this->selectedCallId);
     }
 
