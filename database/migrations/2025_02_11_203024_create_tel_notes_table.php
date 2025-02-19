@@ -23,8 +23,6 @@ return new class extends Migration
             $table->text('message')->nullable(); // Nachricht
             $table->timestamps();
 
-            // Fremdschlüssel-Beziehung zu CallLog (optional)
-            $table->foreign('call_id')->references('id')->on('call_logs')->nullOnDelete();
         });
     }
 

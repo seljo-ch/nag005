@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('call_logs', function (Blueprint $table) {
+        Schema::create('call_journals', function (Blueprint $table) {
             $table->id();
-            $table->string('CallerNumber')->nullable();
-            $table->string('CallerDisplayName')->nullable();
-            $table->string('ADUser')->nullable();
-            $table->string('Email')->nullable();
-            $table->dateTime('Timestamp')->nullable();
+            $table->string('callerNumber')->nullable();
+            $table->string('callerDisplayName')->nullable();
+            $table->string('adUser')->nullable();
+            $table->string('adUserEmail')->nullable();
+            $table->dateTime('timestamp')->nullable();
             $table->timestamps();
         });
     }
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('call_logs');
+        Schema::dropIfExists('call_journals');
     }
 };

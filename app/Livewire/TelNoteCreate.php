@@ -4,7 +4,7 @@ namespace App\Livewire;
 
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
-use App\Models\CallLog;
+use App\Models\CallJournal;
 use App\Models\TelNote as TelNoteModel; // 🔥 Alias setzen
 use Mary\Traits\Toast;
 use App\Models\Message; // Nachrichten Model einbinden
@@ -91,14 +91,14 @@ class TelNoteCreate extends Component
         logger()->info("Lade Daten für Call-ID: {$callId}");
 
         $this->callId = $callId;
-        $call = CallLog::find($callId);
+        $call = CallJournal::find($callId);
         $this->messages = Message::pluck('title', 'id')->toArray();
 
         if ($call) {
             $this->senderEmail = Auth::check() ? Auth::user()->email : 'Nicht angemeldet';
-            $this->callerNumber = $call->CallerNumber;
-            $this->callerName = $call->CallerDisplayName;
-            $this->callerDate = $call->Timestamp; // Setzt Datum & Uhrzeit
+            $this->callerNumber = $call->callerNumber;
+            $this->callerName = $call->callerDisplayName;
+            $this->callerDate = $call->timestamp; // Setzt Datum & Uhrzeit
             logger()->info("Call-Daten geladen: " . json_encode($call));
         } else {
             logger()->error("Kein Eintrag für Call-ID gefunden: {$callId}");
@@ -124,7 +124,7 @@ class TelNoteCreate extends Component
 
         // Falls die Notiz mit einem CallLog verknüpft ist, setzen wir "Note" auf true
         if ($this->callId) {
-            CallLog::where('id', $this->callId)->update(['Note' => true]);
+            CallJournal::where('id', $this->callId)->update(['Note' => true]);
             logger()->info("Call-ID {$this->callId}: Feld 'Note' auf true gesetzt.");
         }
 
