@@ -4,13 +4,13 @@ namespace App\Livewire;
 
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
-use App\Models\CallLog;
+use App\Models\CallJournal;
 use App\Models\TelNote as TelNoteModel; // 🔥 Alias setzen
 use Mary\Traits\Toast;
 use App\Models\Message; // Nachrichten Model einbinden
 use App\Models\User; // Nachrichten Model einbinden
 
-class TelNote extends Component
+class TelNoteCreate extends Component
 {
 
     use Toast;
@@ -40,13 +40,13 @@ class TelNote extends Component
     }
     public function mount($callId = null)
     {
-        logger()->info("TelNote mount() mit Call-ID: " . json_encode($callId));
+        logger()->info("TelNoteCreate mount() mit Call-ID: " . json_encode($callId));
 
         if ($callId) {
             $this->callId = $callId;
             $this->loadCallData($callId);
         } else {
-            logger()->error('TelNote mount() ohne callId aufgerufen!');
+            logger()->error('TelNoteCreate mount() ohne callId aufgerufen!');
         }
 
         $this->messages = Message::pluck('title', 'id')->toArray();
@@ -83,7 +83,7 @@ class TelNote extends Component
             return;
         }
 
-        logger()->info("TelNote reloadData() mit Call-ID: {$this->callId}");
+        logger()->info("TelNoteCreate reloadData() mit Call-ID: {$this->callId}");
         $this->loadCallData($this->callId);
     }
     public function loadCallData($callId)
@@ -91,14 +91,14 @@ class TelNote extends Component
         logger()->info("Lade Daten für Call-ID: {$callId}");
 
         $this->callId = $callId;
-        $call = CallLog::find($callId);
+        $call = CallJournal::find($callId);
         $this->messages = Message::pluck('title', 'id')->toArray();
 
         if ($call) {
             $this->senderEmail = Auth::check() ? Auth::user()->email : 'Nicht angemeldet';
-            $this->callerNumber = $call->CallerNumber;
-            $this->callerName = $call->CallerDisplayName;
-            $this->callerDate = $call->Timestamp; // Setzt Datum & Uhrzeit
+            $this->callerNumber = $call->callerNumber;
+            $this->callerName = $call->callerDisplayName;
+            $this->callerDate = $call->timestamp; // Setzt Datum & Uhrzeit
             logger()->info("Call-Daten geladen: " . json_encode($call));
         } else {
             logger()->error("Kein Eintrag für Call-ID gefunden: {$callId}");
@@ -109,7 +109,7 @@ class TelNote extends Component
     {
         logger()->info("Speichere Notiz für Call-ID: {$this->callId}");
 
-        // Speichere die Notiz in der TelNote-Tabelle
+        // Speichere die Notiz in der TelNoteCreate-Tabelle
         $telNote = TelNoteModel::create([
             'call_id' => $this->callId, // Verbindung zur CallLog-ID (optional)
             'senderEmail' => $this->senderEmail,
@@ -124,7 +124,7 @@ class TelNote extends Component
 
         // Falls die Notiz mit einem CallLog verknüpft ist, setzen wir "Note" auf true
         if ($this->callId) {
-            CallLog::where('id', $this->callId)->update(['Note' => true]);
+            CallJournal::where('id', $this->callId)->update(['Note' => true]);
             logger()->info("Call-ID {$this->callId}: Feld 'Note' auf true gesetzt.");
         }
 
@@ -152,7 +152,7 @@ class TelNote extends Component
     }
     public function render()
     {
-        return view('livewire.tel-note',[
+        return view('livewire.tel-note-create',[
         'config' => $this->configTiny(),
             'messages' => $this->messages,]);
     }

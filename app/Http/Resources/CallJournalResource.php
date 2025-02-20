@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class CallLogResource extends JsonResource
+class CallJournalResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,11 +16,11 @@ class CallLogResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'CallerNumber' => $this->CallerNumber,
-            'CallerDisplayName' => $this->CallerDisplayName,
-            'ADUser' => $this->ADUser,
-            'Email' => $this->Email,
-            'Timestamp' => $this->Timestamp,
+            'callerNumber' => $this->callerNumber,
+            'callerDisplayName' => $this->callerDisplayName,
+            'adUser' => $this->adUser,
+            'adUserEmail' => $this->adUserEmail,
+            'timestamp' => $this->timestamp
         ];
     }
 }

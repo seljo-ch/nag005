@@ -45,10 +45,10 @@
 
     <!-- Modal new Tel Note -->
 
-    <x-modal wire:model.defer="TelNote" class="backdrop-blur" title="Notiz für: {{ $selectedCallId ? App\Models\CallLog::find($selectedCallId)?->CallerNumber : '' }}"
+    <x-modal wire:model.defer="TelNote" class="backdrop-blur" title="Notiz für: {{ $selectedCallId ? App\Models\CallJournal::find($selectedCallId)?->CallerNumber : '' }}"
             subtitle="Erstelle eine Gesprächsnotiz für diesen Anruf und sende diese per E-Mail." box-class="w-11/12 max-w-5xl">
 
-        <livewire:tel-note :call-id="$selectedCallId" wire:key="'tel-note-' . $selectedCallId" />
+        <livewire:tel-note-create :call-id="$selectedCallId" wire:key="'tel-note-' . $selectedCallId" />
     </x-modal>
 
 

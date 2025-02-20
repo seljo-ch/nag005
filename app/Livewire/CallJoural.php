@@ -5,7 +5,7 @@ namespace App\Livewire;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
 use Livewire\Component;
-use App\Models\CallLog;
+use App\Models\CallJournal;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Livewire\WithPagination;
 use Mary\Traits\Toast;
@@ -17,7 +17,7 @@ class CallJoural extends Component
 
     public $userEMail = 'olivier.sebel@nyffenegger.ch';
     public $callJournalResults;
-    public array $sortBy = ['column' => 'name', 'direction' => 'asc'];
+    public array $sortBy = ['column' => 'callerDisplayName', 'direction' => 'asc'];
     public bool $drawer = false;
     public string $search = '';
     public $TelNote = false; // Steuert das Modal
@@ -40,7 +40,7 @@ class CallJoural extends Component
 
         logger()->info('openTelNote aufgerufen', ['selectedCallId' => $this->selectedCallId]);
 
-        // Livewire anweisen, dass TelNote sich aktualisiert
+        // Livewire anweisen, dass TelNoteCreate sich aktualisiert
         $this->dispatch('refreshTelNote', $this->selectedCallId);
     }
 
@@ -49,20 +49,20 @@ class CallJoural extends Component
     {
         return [
             //  ['key' => 'id', 'label' => '#', 'class' => 'w-1'],
-            ['key' => 'CallerNumber', 'label' => 'Telefonnummer', 'class' => 'w-64'],
-            ['key' => 'CallerDisplayName', 'label' => 'Name', 'class' => 'w-64'],
+            ['key' => 'callerNumber', 'label' => 'Telefonnummer', 'class' => 'w-64'],
+            ['key' => 'callerDisplayName', 'label' => 'Name', 'class' => 'w-64'],
             // ['key' => 'Email', 'label' => 'E-mail', 'sortable' => false],
-            ['key' => 'Timestamp', 'label' => 'Datum & Zeit', 'format' => ['date', 'd.m.Y - H:m']],
+            ['key' => 'timestamp', 'label' => 'Datum & Zeit', 'format' => ['date', 'd.m.Y - H:m']],
             ['key' => 'Note', 'label' => 'Notiz', 'class' => 'w-10', ],
         ];
     }
 
     public function load_callJournal(): LengthAwarePaginator
     {
-        return CallLog::query()
+        return CallJournal::query()
             ->when($this->search, function (Builder $q) {
-                $q->where('CallerNumber', 'like', "%{$this->search}%")
-                    ->orWhere('CallerDisplayName', 'like', "%{$this->search}%");
+                $q->where('callerNumber', 'like', "%{$this->search}%")
+                    ->orWhere('callerDisplayName', 'like', "%{$this->search}%");
             })
             ->orderBy(...array_values($this->sortBy))
             ->paginate(10);

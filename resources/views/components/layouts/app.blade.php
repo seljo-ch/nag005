@@ -57,8 +57,12 @@
         {{-- Activates the menu item when a route matches the `link` property --}}
         <x-menu activate-by-route active-bg-color="bg-cyan-600 text-white" >
             <x-menu-item title="Home" icon="o-home" link="/" />
-            <x-menu-item title="Telefon Notiz" icon="o-phone" link="/note" />
             <x-menu-item title="Telefon Journal" icon="o-phone" link="/journal" />
+            <x-menu-sub title="Gesprächs Notizen" icon="o-phone">
+                <x-menu-item title="Gesprächs Notiz erstellen" icon="o-phone" link="/note/new" />
+                <x-menu-item title="Alle Gesprächs Notizen anzeigen" icon="o-phone" link="/note" />
+            </x-menu-sub>
+
             <x-menu-item title="SMS Versenden" icon="o-envelope" link="/sms" />
 
             <div class="divider divider-Accent">Admin Bereich</div>
