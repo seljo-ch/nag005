@@ -10,7 +10,7 @@ use Illuminate\Pagination\LengthAwarePaginator;
 use Livewire\WithPagination;
 use Mary\Traits\Toast;
 
-class CallJoural extends Component
+class CallJournalComp extends Component
 {
     use Toast;
     use WithPagination;
@@ -53,7 +53,7 @@ class CallJoural extends Component
             ['key' => 'callerDisplayName', 'label' => 'Name', 'class' => 'w-64'],
             // ['key' => 'Email', 'label' => 'E-mail', 'sortable' => false],
             ['key' => 'timestamp', 'label' => 'Datum & Zeit', 'format' => ['date', 'd.m.Y - H:m']],
-            ['key' => 'Note', 'label' => 'Notiz', 'class' => 'w-10', ],
+            ['key' => 'note', 'label' => 'Notiz', 'class' => 'w-10', ],
         ];
     }
 

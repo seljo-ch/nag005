@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('callerDisplayName')->nullable();
             $table->string('adUser')->nullable();
             $table->string('adUserEmail')->nullable();
+            $table->boolean('note')->nullable();
             $table->dateTime('timestamp')->nullable();
             $table->timestamps();
         });

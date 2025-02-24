@@ -124,7 +124,7 @@ class TelNoteCreate extends Component
 
         // Falls die Notiz mit einem CallLog verknüpft ist, setzen wir "Note" auf true
         if ($this->callId) {
-            CallJournal::where('id', $this->callId)->update(['Note' => true]);
+            CallJournal::where('id', $this->callId)->update(['note' => true]);
             logger()->info("Call-ID {$this->callId}: Feld 'Note' auf true gesetzt.");
         }
 

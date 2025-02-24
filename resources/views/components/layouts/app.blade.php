@@ -22,7 +22,7 @@
         </label>
 
         {{-- Brand --}}
-        <div>App</div>
+        <div><a href="/"><img src="img/logo_nag.jpg" style="height:3.0em;"/></a></div>
     </x-slot:brand>
 
     {{-- Right side actions --}}
@@ -64,6 +64,15 @@
             </x-menu-sub>
 
             <x-menu-item title="SMS Versenden" icon="o-envelope" link="/sms" />
+
+            <div class="divider divider-Accent">Nagsys</div>
+            <x-menu-item title="Druckaufträge" icon="o-home" link="/" />
+            <div class="divider divider-Accent">Produktion</div>
+            <x-menu-sub  title="DB-Sync" icon="o-home" link="/" >
+                <x-menu-item title="Funktionen" icon="o-phone" link="/note/new" />
+                <x-menu-item title="Protokoll" icon="o-phone" link="/note/new" />
+            </x-menu-sub>
+            <x-menu-item title="Reporting Neustart" icon="o-home" link="/" />
 
             <div class="divider divider-Accent">Admin Bereich</div>
             <x-menu-item title="Users" icon="o-users" link="/users" />

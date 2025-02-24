@@ -14,6 +14,7 @@ class CallJournal extends Model
         'callerDisplayName',
         'adUser',
         'adUserEmail',
+        'note',
         'timestamp'
     ];
 }
