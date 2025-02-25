@@ -41,7 +41,7 @@
 
     {{-- This is a sidebar that works also as a drawer on small screens --}}
     {{-- Notice the `main-drawer` reference here --}}
-    <x-slot:sidebar drawer="main-drawer" collapsible class="bg-base-300">
+    <x-slot:sidebar drawer="main-drawer" class="bg-base-300">
 
         {{-- User --}}
         @if($user = auth()->user())
@@ -76,6 +76,7 @@
 
             <div class="divider divider-Accent">Admin Bereich</div>
             <x-menu-item title="Users" icon="o-users" link="/users" />
+            <x-menu-item title="DocGen neustarten" icon="o-users" link="/users" />
             <x-menu-sub title="Settings" icon="o-cog-6-tooth">
                 <x-menu-item title="Wifi" icon="o-wifi" link="####" />
                 <x-menu-item title="Archives" icon="o-archive-box" link="####" />
