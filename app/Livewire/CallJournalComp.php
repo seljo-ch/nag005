@@ -17,7 +17,7 @@ class CallJournalComp extends Component
 
     public $userEMail = 'olivier.sebel@nyffenegger.ch';
     public $callJournalResults;
-    public array $sortBy = ['column' => 'callerDisplayName', 'direction' => 'asc'];
+    public array $sortBy = ['column' => 'id', 'direction' => 'desc'];
     public bool $drawer = false;
     public string $search = '';
     public $TelNote = false; // Steuert das Modal
@@ -64,7 +64,7 @@ class CallJournalComp extends Component
                 $q->where('callerNumber', 'like', "%{$this->search}%")
                     ->orWhere('callerDisplayName', 'like', "%{$this->search}%");
             })
-            ->orderBy(...array_values($this->sortBy))
+            ->orderBy($this->sortBy['column'] ?? 'id', $this->sortBy['direction'] ?? 'desc')
             ->paginate(10);
     }
 
