@@ -52,8 +52,9 @@ class CallJournalComp extends Component
             ['key' => 'callerNumber', 'label' => 'Telefonnummer', 'class' => 'w-64'],
             ['key' => 'callerDisplayName', 'label' => 'Name', 'class' => 'w-64'],
             // ['key' => 'Email', 'label' => 'E-mail', 'sortable' => false],
-            ['key' => 'timestamp', 'label' => 'Datum & Zeit', 'format' => ['date', 'd.m.Y - H:m']],
-            ['key' => 'note', 'label' => 'Notiz', 'class' => 'w-10', ],
+            ['key' => 'timestamp', 'label' => 'Datum & Zeit', 'format' => ['date', 'd.m.Y - H:i:s']],
+            ['key' => 'note', 'label' => 'Notiz', 'class' => 'w-5', ],
+            ['key' => 'internalCall', 'label' => 'Intern', 'class' => 'w-5', ],
         ];
     }
 
@@ -65,7 +66,7 @@ class CallJournalComp extends Component
                     ->orWhere('callerDisplayName', 'like', "%{$this->search}%");
             })
             ->orderBy($this->sortBy['column'] ?? 'id', $this->sortBy['direction'] ?? 'desc')
-            ->paginate(10);
+            ->paginate(25);
     }
 
     public function mount()

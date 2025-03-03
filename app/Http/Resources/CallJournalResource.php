@@ -20,7 +20,8 @@ class CallJournalResource extends JsonResource
             'callerDisplayName' => $this->callerDisplayName,
             'adUser' => $this->adUser,
             'adUserEmail' => $this->adUserEmail,
-            'timestamp' => $this->timestamp
+            'timestamp' => $this->timestamp,
+            'internalCall' => $this->internalCall
         ];
     }
 }

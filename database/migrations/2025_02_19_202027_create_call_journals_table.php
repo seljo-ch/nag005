@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('adUser')->nullable();
             $table->string('adUserEmail')->nullable();
             $table->boolean('note')->nullable();
+            $table->boolean('internalCall')->nullable();
             $table->dateTime('timestamp')->nullable();
             $table->timestamps();
         });

@@ -28,7 +28,7 @@
     {{-- Right side actions --}}
     <x-slot:actions>
         <x-button label="Support - Ticket" icon="o-ticket" external link="https://support.nyffenegger.ch" class="btn-ghost btn-sm" responsive />
-        <x-button label="Wissensdatenbank" icon="o-book-open" external link="https://support.nyffenegger.ch/help/de" class="btn-ghost btn-sm" responsive />
+        <x-button label="Wissensdatenbank" icon="o-book-open" external link="https://support.nyffenegger.ch/help/de-de" class="btn-ghost btn-sm" responsive />
         <x-button label="TeamViewer" icon="o-question-mark-circle" external link="https://support.nyffenegger.ch" class="btn-ghost btn-sm" responsive />
         {{--  <x-button label="Notifications" icon="o-bell" link="###" class="btn-ghost btn-sm" responsive />
          <x-theme-toggle darkTheme="dracula" lightTheme="light" /> --}}

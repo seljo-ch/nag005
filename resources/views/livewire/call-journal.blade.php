@@ -16,9 +16,15 @@
                 <x-button label="{{ $call['CallerNumber'] }}" link="tel:{{ $call['CallerNumber'] }}" external icon="o-phone" tooltip="Anrufen" class="btn-ghost btn btn-xs" />
             @endscope
 
-            @scope('cell_Note', $call)
-                @if (!empty($call['Note']))
+            @scope('cell_note', $call)
+                @if (!empty($call['note']))
                     <x-icon name="s-envelope" class="w-5 h-5 text-green-500 text-2xl" />
+                @endif
+            @endscope
+
+            @scope('cell_internalCall', $call)
+                @if (!empty($call['internalCall']))
+                    <x-icon name="m-check-circle" class="w-5 h-5 text-green-500 text-2xl" />
                 @endif
             @endscope
 

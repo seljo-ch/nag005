@@ -15,6 +15,8 @@ class CallJournal extends Model
         'adUser',
         'adUserEmail',
         'note',
+        'internalCall',
         'timestamp'
     ];
+
 }
