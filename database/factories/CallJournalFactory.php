@@ -20,8 +20,9 @@ class CallJournalFactory extends Factory
             'callerNumber' => fake('de_CH')->e164PhoneNumber(),
             'callerDisplayName' => fake('de_CH')->name(),
             'adUser' => 'nyffenegger\\ose',
-            'adUserEmail' => fake('de_CH')->email(),
-            //'Note' => fake()->boolean() ? '1' : '0',
+            'adUserEmail' => 'test@example.com',
+            'note' => fake()->boolean() ? '1' : '0',
+            'internalCall' => fake()->boolean() ? '1' : '0',
             'timestamp' => fake()->dateTime()
         ];
     }

@@ -8,7 +8,15 @@
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <script src="https://cdn.tiny.cloud/1/hhqrxrzqm2x8hptyhkermsbqxc6stmpinglnf071x5f77833/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+    {{-- Flatpickr  --}}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://npmcdn.com/flatpickr/dist/l10n/de.js"></script>
 
+    {{-- You need to set here the default locale or any global flatpickr settings--}}
+    <script>
+        flatpickr.localize(flatpickr.l10ns.de);
+    </script>
 </head>
 <body class="font-sans antialiased">
 
@@ -56,35 +64,38 @@
 
         {{-- Activates the menu item when a route matches the `link` property --}}
         <x-menu activate-by-route active-bg-color="bg-cyan-600 text-white" >
-            <x-menu-item title="Home" icon="o-home" link="/" />
             <x-menu-item title="Telefon Journal" icon="o-phone" link="/journal" />
-            <x-menu-sub title="Gesprächs Notizen" icon="o-phone">
-                <x-menu-item title="Gesprächs Notiz erstellen" icon="o-phone" link="/note/new" />
-                <x-menu-item title="Alle Gesprächs Notizen anzeigen" icon="o-phone" link="/note" />
+            <x-menu-sub title="Gesprächs Notizen" icon="o-phone" open>
+                <x-menu-item title="Erstellen" icon="o-phone" link="/note/new" exact />
+                <x-menu-item title="Alle anzeigen" icon="o-phone" link="/note" exact />
             </x-menu-sub>
-
+            @hasanyrole('dispo|admin')
             <x-menu-item title="SMS Versenden" icon="o-envelope" link="/sms" />
-
+            @endhasanyrole
             <div class="divider divider-Accent">Nagsys</div>
             <x-menu-item title="Druckaufträge" icon="o-home" link="/" />
+            @hasanyrole('avor|admin')
             <div class="divider divider-Accent">Produktion</div>
             <x-menu-sub  title="DB-Sync" icon="o-home" link="/" >
                 <x-menu-item title="Funktionen" icon="o-phone" link="/note/new" />
                 <x-menu-item title="Protokoll" icon="o-phone" link="/note/new" />
             </x-menu-sub>
             <x-menu-item title="Reporting Neustart" icon="o-home" link="/" />
-
+            @endhasanyrole
+            @hasrole('admin')
             <div class="divider divider-Accent">Admin Bereich</div>
-            <x-menu-item title="Users" icon="o-users" link="/users" />
-            <x-menu-item title="DocGen neustarten" icon="o-users" link="/users" />
-            <x-menu-sub title="Settings" icon="o-cog-6-tooth">
-                <x-menu-item title="Wifi" icon="o-wifi" link="####" />
-                <x-menu-item title="Archives" icon="o-archive-box" link="####" />
+            <x-menu-sub title="Benutzer" icon="o-users" link="/users" >
+                <x-menu-item title="Liste" icon="o-users" link="/users" exact />
+                <x-menu-item title="Rollen" icon="o-wifi" link="/users/roles" exact />
+                <x-menu-item title="Berechtigungen" icon="o-wifi" link="/users/roles/permissions" exact />
             </x-menu-sub>
-        </x-menu>
-    </x-slot:sidebar>
 
-    {{-- The `$slot` goes here --}}
+            <x-menu-item title="DocGen neustarten" icon="o-users" link="" />
+            @endhasrole
+            </x-menu>
+        </x-slot:sidebar>
+
+        {{-- The `$slot` goes here --}}
     <x-slot:content class="bg-gray-100">
         {{ $slot }}
 

@@ -5,23 +5,23 @@ use App\Livewire\UserAdmin;
 use App\Livewire\Welcome;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
+Route::redirect('/login', '/auth/login')->name('login');
+Route::redirect('/logout', '/auth/logout')->name('logout');
 
-Route::get('/', Welcome::class);
-Route::get('/users', \App\Livewire\UserAdmin::class);
-Route::get('/users/{id}/edit', UserAdmin::class)->name('editUser');
 
-Route::get('/sms', \App\Livewire\SendSMS::class);
-Route::get('/note', \App\Livewire\TelNoteList::class);
-Route::get('/note/new', \App\Livewire\TelNoteCreate::class);
-Route::get('/journal', \App\Livewire\CallJournalComp::class);
+Route::middleware(['auth', 'role:user'])->group(function () {
+    Route::get('/', \App\Livewire\CallJournalComp::class);
+    Route::get('/sms', \App\Livewire\SendSMS::class);
+    Route::get('/note', \App\Livewire\TelNoteList::class);
+    Route::get('/note/new', \App\Livewire\TelNoteCreate::class);
+    Route::get('/journal', \App\Livewire\CallJournalComp::class);
+});
+
+Route::middleware(['auth', 'role:admin'])->group(function () {
+    Route::get('/users', \App\Livewire\Admin\UserList::class);
+    Route::get('/users/roles', \App\Livewire\Admin\Roles::class);
+    Route::get('/users/roles/permissions', \App\Livewire\Admin\Permissions::class);
+});
+
+
 

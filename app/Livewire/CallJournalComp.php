@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use App\Models\CallJournal;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -51,8 +52,9 @@ class CallJournalComp extends Component
             //  ['key' => 'id', 'label' => '#', 'class' => 'w-1'],
             ['key' => 'callerNumber', 'label' => 'Telefonnummer', 'class' => 'w-64'],
             ['key' => 'callerDisplayName', 'label' => 'Name', 'class' => 'w-64'],
-            // ['key' => 'Email', 'label' => 'E-mail', 'sortable' => false],
             ['key' => 'timestamp', 'label' => 'Datum & Zeit', 'format' => ['date', 'd.m.Y - H:i:s']],
+            ['key' => 'adUserEmail', 'label' => 'E-mail', 'class' => Auth::user()->hasRole('admin') ? '' : 'hidden'],
+            ['key' => 'adUser', 'label' => 'AD-User', 'class' => Auth::user()->hasRole('admin') ? '' : 'hidden'],
             ['key' => 'note', 'label' => 'Notiz', 'class' => 'w-5', ],
             ['key' => 'internalCall', 'label' => 'Intern', 'class' => 'w-5', ],
         ];

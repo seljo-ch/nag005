@@ -2,9 +2,11 @@
 
 namespace App\Livewire;
 
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use App\Services\eCallSMS;
 use Mary\Traits\Toast;
+use Spatie\Permission\Exceptions\UnauthorizedException;
 
 
 class SendSMS extends Component
@@ -34,6 +36,10 @@ class SendSMS extends Component
 
     public function mount()
     {
+        if (!Auth::user() || !Auth::user()->hasRole('dispo')) {
+            throw new UnauthorizedException(403, 'Du hast keine Berechtigung für diese Seite.');
+        }
+
         // Standardwert für das 'from'-Feld setzen
         $this->from = '0041764766627'; // Beispielnummer
     }

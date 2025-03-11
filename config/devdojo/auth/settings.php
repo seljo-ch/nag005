@@ -18,5 +18,5 @@ return [
     'center_align_social_provider_button_content' => false,
     'center_align_text' => false,
     'social_providers_location' => 'bottom',
-    'check_account_exists_before_login' => false,
+    'check_account_exists_before_login' => true,
 ];
