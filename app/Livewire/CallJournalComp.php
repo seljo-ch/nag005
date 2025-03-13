@@ -50,13 +50,14 @@ class CallJournalComp extends Component
     {
         return [
             //  ['key' => 'id', 'label' => '#', 'class' => 'w-1'],
-            ['key' => 'callerNumber', 'label' => 'Telefonnummer', 'class' => 'w-64'],
-            ['key' => 'callerDisplayName', 'label' => 'Name', 'class' => 'w-64'],
-            ['key' => 'timestamp', 'label' => 'Datum & Zeit', 'format' => ['date', 'd.m.Y - H:i:s']],
-            ['key' => 'adUserEmail', 'label' => 'E-mail', 'class' => Auth::user()->hasRole('admin') ? '' : 'hidden'],
+            ['key' => 'callerNumber', 'label' => 'Telefonnummer', 'class' => 'w-15'],
+            ['key' => 'callerDisplayName', 'label' => 'Name', 'class' => 'w-25'],
+            ['key' => 'timestamp', 'label' => 'Datum & Zeit', 'format' => ['date', 'd.m.Y - H:i:s'], 'class' => 'w-10' ],
+            ['key' => 'adUserEmail', 'label' => 'Benutzer', 'class' =>'w-13'],
             ['key' => 'adUser', 'label' => 'AD-User', 'class' => Auth::user()->hasRole('admin') ? '' : 'hidden'],
-            ['key' => 'note', 'label' => 'Notiz', 'class' => 'w-5', ],
-            ['key' => 'internalCall', 'label' => 'Intern', 'class' => 'w-5', ],
+            ['key' => 'shortNote', 'label' => 'Notiz', 'class' => 'w-10'],
+            ['key' => 'note', 'label' => 'E-Mail' , 'class' => 'w-1'],
+            ['key' => 'internalCall', 'label' => 'Intern' , 'class' => 'w-1'],
         ];
     }
 

@@ -11,11 +11,13 @@
 
     <!-- TABLE  -->
     <x-card>
-        <x-table :headers="$headers" :rows="$calls" :sort-by="$sortBy" with-pagination>
+        <x-table :headers="$headers" :rows="$calls" :sort-by="$sortBy" with-pagination class="table-xs" striped >
             @scope('cell_callerNumber',$call)
                 <x-button label="{{ $call['callerNumber'] }}" link="tel:{{ $call['callerNumber'] }}" external icon="o-phone" tooltip="Anrufen" class="btn-ghost btn btn-xs" />
             @endscope
-
+            @scope('cell_shortNote', $call)
+<x-input class="input-sm"/>
+            @endscope
             @scope('cell_note', $call)
                 @if (!empty($call['note']))
                     <x-icon name="s-envelope" class="w-5 h-5 text-green-500 text-2xl" />
@@ -32,7 +34,7 @@
             <div class="flex space-x-2">
                 <x-button icon="c-plus-circle"
                           wire:click="openTelNote({{ $call['id'] }})"
-                          tooltip-left="Neue Notiz" />
+                          tooltip-left="Neues E-Mail" />
             </div>
             @endscope
 
