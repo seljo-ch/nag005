@@ -139,8 +139,7 @@ class CallJournalComp extends Component
                 ['note' => $noteText]
             );
         }
-
-        $this->dispatch('toast', 'Short Note gespeichert!', 'success');
+        $this->success('Notiz erfolgreich gespeichert!',  timeout: 5000);
     }
     public function render()
     {
