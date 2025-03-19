@@ -46,22 +46,20 @@
 
         <x-input label="Suche nach Name oder Telefonnummer" placeholder="Suchen..." wire:model.live.debounce="search" icon="o-magnifying-glass" @keydown.enter="$wire.drawer = false" />
         <br />
-        <x-datepicker label="Datum" wire:model="myDate1" icon="o-calendar" :config="['locale' => 'de', 'mode' => 'range','altFormat' => 'd.m.Y']" />
+        <x-datetime label="Datum" wire:model.live.debounce="date" icon="o-calendar" clearable />
         <br />
-        <x-toggle label="Interne Anrufe" wire:model="item2" right hint="Blendet interne Anrufe aus" />
+        <x-toggle label="Interne Anrufe" wire:model.live="hideInternalCalls" right hint="Blendet interne Anrufe aus" checked/>
         <hr /><br />
-        <x-toggle label="Notiz" wire:model="item2" right hint="Blendet Anrufe mit einer Notiz aus" />
+        <x-toggle label="Notiz" wire:model.live="hideNotedCalls" right hint="Blendet Anrufe mit einer Notiz aus" />
         <hr />
         <br />
-        @hasrole('admin')
-        <x-input label="E-Mailadresse oder Benutzername" placeholder="Suchen..." wire:model.live.debounce="search" icon="o-magnifying-glass" @keydown.enter="$wire.drawer = false" />
+
+        <x-input label="Kürzel/Benutzer" placeholder="Suchen..." wire:model.live.debounce="userFilter" icon="o-magnifying-glass" @keydown.enter="$wire.drawer = false" />
         <br />
 
-        @endhasrole
-
         <x-slot:actions>
-            <x-button label="Reset" icon="o-x-mark" wire:click="clear" spinner />
-            <x-button label="Done" icon="o-check" class="btn-primary" @click="$wire.drawer = false" />
+            <x-button label="Löschen" icon="o-x-mark" wire:click="clear" spinner />
+            <x-button label="Suchen" icon="o-check" class="btn-primary" wire:click="load_callJournal" @click="$wire.drawer = false" />
         </x-slot:actions>
     </x-drawer>
 

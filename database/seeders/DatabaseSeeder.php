@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
             RolesAndPermissionsSeeder::class,
         ]);
 
-        CallJournal::factory()->count(10)->create();
+        CallJournal::factory()->count(30)->create();
         Message::factory()->count(4)->create();
 
     }

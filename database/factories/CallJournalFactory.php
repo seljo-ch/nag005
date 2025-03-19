@@ -23,7 +23,7 @@ class CallJournalFactory extends Factory
             'adUserEmail' => 'test@example.com',
             'note' => fake()->boolean() ? '1' : '0',
             'internalCall' => fake()->boolean() ? '1' : '0',
-            'timestamp' => fake()->dateTime()
+            'timestamp' => fake()->dateTimeBetween('-30 days', 'now'),
         ];
     }
 }
