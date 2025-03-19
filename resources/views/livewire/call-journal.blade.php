@@ -16,7 +16,10 @@
                 <x-button label="{{ $call['callerNumber'] }}" link="tel:{{ $call['callerNumber'] }}" external icon="o-phone" tooltip="Anrufen" class="btn-ghost btn btn-xs" />
             @endscope
             @scope('cell_shortNote', $call)
-<x-input class="input-sm"/>
+            <div class="flex space-x-2">
+                <x-input wire:model.defer="shortNotes.{{ $call['id'] }}" class="input-sm"  />
+                <x-button icon="o-check" class="btn-primary btn-sm" wire:click="saveShortNote({{ $call['id'] }})" tooltip="Short Note speichern" />
+            </div>
             @endscope
             @scope('cell_note', $call)
                 @if (!empty($call['note']))

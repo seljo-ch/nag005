@@ -7,6 +7,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use App\Models\CallJournal;
+use App\Models\ShortNote;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Livewire\WithPagination;
 use Mary\Traits\Toast;
@@ -31,6 +32,11 @@ class CallJournalComp extends Component
     public bool $hideInternalCalls = true; // Interne Anrufe ausblenden
     public bool $hideNotedCalls = false; // Anrufe mit Notiz ausblenden
     public string $userFilter = ''; // Kürzel/Benutzer Filter
+
+
+    // Short Notes
+    public array $shortNotes = [];
+
     public function closeTelNote()
     {
         $this->TelNote = false;
@@ -110,11 +116,32 @@ class CallJournalComp extends Component
     }
     public function mount()
     {
-        // $this->userEMail = auth()->user()->email;
+        $this->loadShortNotes();
     }
 
+    public function loadShortNotes()
+    {
+        $this->shortNotes = ShortNote::pluck('note', 'call_journal_id')->toArray();
+    }
+    public function saveShortNote($callJournalId)
+    {
+        if (!isset($this->shortNotes[$callJournalId])) {
+            return;
+        }
 
+        $noteText = trim($this->shortNotes[$callJournalId]);
 
+        if (empty($noteText)) {
+            ShortNote::where('call_journal_id', $callJournalId)->delete();
+        } else {
+            ShortNote::updateOrCreate(
+                ['call_journal_id' => $callJournalId],
+                ['note' => $noteText]
+            );
+        }
+
+        $this->dispatch('toast', 'Short Note gespeichert!', 'success');
+    }
     public function render()
     {
         return view('livewire.call-journal',[
