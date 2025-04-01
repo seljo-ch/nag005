@@ -15,6 +15,7 @@ Route::middleware(['auth', 'role:user'])->group(function () {
     Route::get('/note', \App\Livewire\TelNoteList::class);
     Route::get('/note/new', \App\Livewire\TelNoteCreate::class);
     Route::get('/journal', \App\Livewire\CallJournalComp::class);
+    Route::get('/settings', \App\Livewire\UserSettingsComponent::class);
 });
 
 Route::middleware(['auth', 'role:admin'])->group(function () {

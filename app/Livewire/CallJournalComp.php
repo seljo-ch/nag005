@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use App\Models\CallJournal;
 use App\Models\ShortNote;
+use App\Models\User;
+use App\Models\UserSetting;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Livewire\WithPagination;
 use Mary\Traits\Toast;
@@ -36,6 +38,15 @@ class CallJournalComp extends Component
 
     // Short Notes
     public array $shortNotes = [];
+
+    // UserSettings
+    public $forwarded_to;
+    public $forwarded_via;
+    public $showForwarding;
+    public $editForwarding;
+    public $disableForwarding;
+    public $showShortnotes;
+    public $editOwnShortnotesOnly;
 
     public function closeTelNote()
     {
@@ -66,6 +77,8 @@ class CallJournalComp extends Component
             //   ['key' => 'adUserEmail', 'label' => 'Benutzer', 'class' =>'w-13'],
             ['key' => 'adUser', 'label' => 'Benutzer'],
             ['key' => 'shortNote', 'label' => 'Notiz', 'class' => 'w-10'],
+            ['key' => 'forwarded_to', 'label' => 'forwarded_to', 'class' => 'w-10'],
+            ['key' => 'forwarded_via', 'label' => 'forwarded_via', 'class' => 'w-10'],
             ['key' => 'note', 'label' => 'E-Mail' , 'class' => 'w-1'],
             ['key' => 'internalCall', 'label' => 'Intern' , 'class' => 'w-1'],
         ];
@@ -114,10 +127,17 @@ class CallJournalComp extends Component
         $this->hideNotedCalls = false;
         $this->userFilter = '';
     }
+
     public function mount()
-    {
-        $this->loadShortNotes();
-    }
+{
+    $settings = auth()->user()->settings;
+
+    $this->show_forwarding = $settings->show_forwarding ?? true;
+    $this->edit_forwarding = $settings->edit_forwarding ?? true;
+    $this->disable_forwarding = $settings->disable_forwarding ?? false;
+    $this->show_shortnotes = $settings->show_shortnotes ?? true;
+    $this->edit_own_shortnotes_only = $settings->edit_own_shortnotes_only ?? true;
+}
 
     public function loadShortNotes()
     {
@@ -140,6 +160,19 @@ class CallJournalComp extends Component
             );
         }
         $this->success('Notiz erfolgreich gespeichert!',  timeout: 5000);
+    }
+
+    public function save()
+    {
+        $user = auth()->user();
+        $call = new CallJournal();
+        // ... bestehende Felder
+        if ($user->getSetting('show_forwarding') && !$user->getSetting('disable_forwarding')) {
+            $call->forwarded_to = $this->forwarded_to;
+            $call->forwarded_via = $this->forwarded_via;
+        }
+        $call->save();
+        // ...
     }
     public function render()
     {

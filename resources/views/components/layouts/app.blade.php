@@ -55,6 +55,7 @@
         @if($user = auth()->user())
             <x-list-item :item="$user" value="name" sub-value="email" no-separator no-hover class="pt-2">
                 <x-slot:actions>
+                    <x-button icon="o-cog-8-tooth" class="btn-circle btn-ghost btn-xs" tooltip-left="Einstellungen" no-wire-navigate link="/settings" />
                     <x-button icon="o-power" class="btn-circle btn-ghost btn-xs" tooltip-left="logoff" no-wire-navigate link="/logout" />
                 </x-slot:actions>
             </x-list-item>
@@ -81,6 +82,7 @@
                 <x-menu-item title="Protokoll" icon="o-phone" link="/note/new" />
             </x-menu-sub>
             <x-menu-item title="Reporting Neustart" icon="o-home" link="/" />
+
             @endhasanyrole
             @hasrole('admin')
             <div class="divider divider-Accent">Admin Bereich</div>

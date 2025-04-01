@@ -15,12 +15,22 @@
             @scope('cell_callerNumber',$call)
                 <x-button label="{{ $call['callerNumber'] }}" link="tel:{{ $call['callerNumber'] }}" external icon="o-phone" tooltip="Anrufen" class="btn-ghost btn btn-xs" />
             @endscope
-            @scope('cell_shortNote', $call)
+            @if($showShortnotes)
+                @scope('cell_shortNote', $call)
 
-                <x-input wire:model.defer="shortNotes.{{ $call['id'] }}" class="input-sm"  />
+                    <x-input wire:model.defer="shortNotes.{{ $call['id'] }}" class="input-sm"  />
+
+
+                @endscope
+            @endif
+            @if($showForwarding && !$disableForwarding)
+            @scope('cell_forwarded_to', $call)
+
+            <x-input wire:model.defer="shortNotes.{{ $call['id'] }}" class="input-sm"  />
 
 
             @endscope
+            @endif
             @scope('cell_note', $call)
                 @if (!empty($call['note']))
                     <x-icon name="s-envelope" class="w-5 h-5 text-green-500 text-2xl" />

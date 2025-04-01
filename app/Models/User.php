@@ -48,4 +48,14 @@ class User extends AuthUser
             'password' => 'hashed',
         ];
     }
+
+    public function settings()
+    {
+        return $this->hasOne(UserSetting::class);
+    }
+
+    public function getSetting($key)
+    {
+        return optional($this->settings)->$key ?? false;
+    }
 }

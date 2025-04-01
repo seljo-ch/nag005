@@ -7,13 +7,11 @@ use Illuminate\Support\Collection;
 use Livewire\Component;
 use Mary\Traits\Toast;
 use App\Models\User;
+use App\Models\UserSetting;
 
 class UserAdmin extends Component
 {
     use Toast;
-
-
-
 
     public string $search = '';
 
@@ -53,12 +51,8 @@ class UserAdmin extends Component
         ];
     }
 
-    /**
-     * For demo purpose, this is a static collection.
-     *
-     * On real projects you do it with Eloquent collections.
-     * Please, refer to maryUI docs to see the eloquent examples.
-     */
+
+
     public function users(): Collection
     {
         return User::query()
