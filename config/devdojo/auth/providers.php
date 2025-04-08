@@ -50,7 +50,7 @@ return [
         'scopes' => null,
         'parameters' => null,
         'stateless' => true,
-        'active' => false,
+        'active' => true,
         'socialite' => true,
         'svg' => '<svg class="w-full h-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none"><path fill="#24292F" fill-rule="evenodd" d="M24.02 0C10.738 0 0 10.817 0 24.198 0 34.895 6.88 43.95 16.424 47.154c1.193.241 1.63-.52 1.63-1.161 0-.561-.039-2.484-.039-4.488-6.682 1.443-8.073-2.884-8.073-2.884-1.074-2.805-2.665-3.525-2.665-3.525-2.187-1.483.16-1.483.16-1.483 2.425.16 3.698 2.484 3.698 2.484 2.147 3.686 5.607 2.644 7 2.003.198-1.562.834-2.644 1.51-3.245-5.329-.56-10.936-2.644-10.936-11.939 0-2.644.954-4.807 2.466-6.49-.239-.6-1.074-3.085.239-6.41 0 0 2.028-.641 6.6 2.484 1.959-.53 3.978-.8 6.006-.802 2.028 0 4.095.281 6.005.802 4.573-3.125 6.601-2.484 6.601-2.484 1.313 3.325.477 5.81.239 6.41 1.55 1.683 2.465 3.846 2.465 6.49 0 9.295-5.607 11.338-10.976 11.94.876.76 1.63 2.202 1.63 4.486 0 3.245-.039 5.85-.039 6.65 0 .642.438 1.403 1.63 1.163C41.12 43.949 48 34.895 48 24.198 48.04 10.817 37.262 0 24.02 0Z" clip-rule="evenodd"/></svg>',
         'client_id' => env('GITHUB_CLIENT_ID'),
@@ -101,15 +101,22 @@ return [
         'client_secret' => env('APPLE_CLIENT_SECRET'),
     ],
     'microsoft' => [
+        //https://learn.microsoft.com/en-au/entra/identity-platform/v2-protocols#endpoints
         'name' => 'Microsoft',
         'scopes' => null,
         'parameters' => null,
         'stateless' => true,
-        'active' => false,
+        'active' => true,
         'socialite' => false,
         'svg' => '<svg class="w-full h-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none"><path fill="#F35325" d="M2.087 2.087h20.87v20.87H2.086V2.086Z"/><path fill="#81BC06" d="M25.044 2.087h20.869v20.87h-20.87V2.086Z"/><path fill="#05A6F0" d="M2.087 25.044h20.87v20.869H2.086v-20.87Z"/><path fill="#FFBA08" d="M25.044 25.044h20.869v20.869h-20.87v-20.87Z"/></svg>',
         'client_id' => env('MICROSOFT_CLIENT_ID'),
         'client_secret' => env('MICROSOFT_CLIENT_SECRET'),
+        'tenant' => env('MICROSOFT_TENANT_ID', 'common'),
+        'redirect' => env('MICROSOFT_REDIRECT_URI'),
+        'include_tenant_info' => true,
+        'tenant_fields' => [ 'tenantType', 'technicalNotificationMails' ],
+        'include_avatar' => true,
+        'include_avatar_size' => '648x648',
     ],
     'pinterest' => [
         'name' => 'Pinterest',
@@ -121,6 +128,7 @@ return [
         'svg' => '<svg class="w-full h-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none"><path fill="#fff" d="M24 48c13.255 0 24-10.745 24-24S37.255 0 24 0 0 10.745 0 24s10.745 24 24 24Z"/><path fill="#E60019" d="M24 0C10.746 0 0 10.746 0 24c0 10.173 6.321 18.864 15.25 22.36-.218-1.896-.396-4.82.078-6.893.435-1.877 2.805-11.931 2.805-11.931s-.71-1.442-.71-3.556c0-3.338 1.935-5.827 4.345-5.827 2.054 0 3.042 1.54 3.042 3.378 0 2.054-1.304 5.136-1.995 8-.573 2.39 1.205 4.346 3.555 4.346 4.267 0 7.546-4.504 7.546-10.983 0-5.748-4.128-9.758-10.034-9.758-6.835 0-10.845 5.116-10.845 10.41 0 2.054.79 4.266 1.778 5.471a.714.714 0 0 1 .158.692c-.178.75-.593 2.39-.672 2.726-.098.434-.355.533-.81.316-3.002-1.403-4.879-5.768-4.879-9.304 0-7.565 5.492-14.519 15.862-14.519 8.316 0 14.795 5.926 14.795 13.867 0 8.277-5.215 14.933-12.444 14.933-2.43 0-4.721-1.264-5.492-2.765l-1.5 5.709c-.534 2.093-1.996 4.7-2.984 6.3a24.104 24.104 0 0 0 7.111 1.067c13.255 0 24-10.745 24-24C48 10.747 37.255 0 24 0Z"/></svg>',
         'client_id' => env('PINTEREST_CLIENT_ID'),
         'client_secret' => env('PINTEREST_CLIENT_SECRET'),
+
     ],
     'reddit' => [
         'name' => 'Reddit',

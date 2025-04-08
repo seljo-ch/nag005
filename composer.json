@@ -14,6 +14,8 @@
         "laravel/tinker": "^2.9",
         "livewire/livewire": "^3.5",
         "robsontenorio/mary": "^1.41",
+        "socialiteproviders/microsoft": "^4.6",
+        "socialiteproviders/microsoft-azure": "^5.2",
         "spatie/laravel-permission": "^6.16"
     },
     "require-dev": {
